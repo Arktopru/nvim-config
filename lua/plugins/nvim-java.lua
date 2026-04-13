@@ -7,30 +7,22 @@ return {
 				nvim_version = true, -- Check Neovim version
 				nvim_jdtls_conflict = true, -- Check for nvim-jdtls conflict
 			},
-			-- Extensions
 			lombok = {
 				enable = true,
 			},
-
 			java_test = {
 				enable = true,
 			},
-
 			java_debug_adapter = {
 				enable = true,
 			},
-
 			spring_boot_tools = {
 				enable = true,
 			},
-
-			-- JDK installation
 			jdk = {
 				auto_install = true,
 				version = "25",
 			},
-
-			-- Logging
 			log = {
 				use_console = true,
 				use_file = true,
