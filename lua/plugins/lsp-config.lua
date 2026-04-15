@@ -40,7 +40,7 @@ return {
 			-- ensure that we have lua language server, typescript launguage server, java language server, and java test language server are installed
 			require("mason-lspconfig").setup({
 				-- ensure_installed = { "lua_ls", "ts_ls", "jdtls", "cssls" },
-				ensure_installed = { "lua_ls", "ts_ls", "cssls", "html", "jsonls" },
+				ensure_installed = { "lua_ls", "ts_ls", "cssls", "html", "jsonls", "groovyls" },
 			})
 		end,
 	},
@@ -77,7 +77,9 @@ return {
 			vim.lsp.config("ts_ls", capabilities)
 			vim.lsp.config("cssls", capabilities)
 			vim.lsp.config("html", capabilities)
-            vim.lsp.config("jsonls", capabilities)
+			vim.lsp.config("jsonls", capabilities)
+			vim.lsp.config("groovyls", capabilities)
+
 			--          vim.lsp.config.freemarker_ls = {
 			-- 	cmd = {
 			-- 		"java",
@@ -151,31 +153,31 @@ return {
 					context = { only = { "source.organizeImports" } },
 					apply = true,
 				})
-			end, { desc = "[C]ode [O]rganize imports"})
+			end, { desc = "[C]ode [O]rganize imports" })
 			vim.keymap.set("n", "<leader>cq", function()
 				vim.lsp.buf.code_action({
 					context = { only = { "quickassist" } },
 					apply = true,
 				})
-			end, { desc = "[C]ode [Q]uick assist"})
+			end, { desc = "[C]ode [Q]uick assist" })
 			vim.keymap.set("n", "<leader>cg", function()
 				vim.lsp.buf.code_action({
 					context = { only = { "source.generate" } },
 					apply = true,
 				})
-			end, { desc = "[C]ode [G]enerate"})
+			end, { desc = "[C]ode [G]enerate" })
 			vim.keymap.set("n", "<leader>cm", function()
 				vim.lsp.buf.code_action({
 					context = { only = { "refactor.extract_method" } },
 					apply = true,
 				})
-			end, { desc = "[C]ode extract [M]ethod from cursor"})
+			end, { desc = "[C]ode extract [M]ethod from cursor" })
 			vim.keymap.set("n", "<leader>rm", function()
 				vim.lsp.buf.code_action({
 					context = { only = { "refactor.move" } },
 					apply = true,
 				})
-			end, { desc = "[R]efactor [M]ove"})
+			end, { desc = "[R]efactor [M]ove" })
 		end,
 	},
 }
