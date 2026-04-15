@@ -122,6 +122,8 @@ return {
                     find_files = {
                         theme = "dropdown",
                         previewer = false,
+                        hidden = true,
+                        no_ignore = true,
                     },
 
                     buffers = {
