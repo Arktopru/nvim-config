@@ -39,8 +39,7 @@ return {
 		config = function()
 			-- ensure that we have lua language server, typescript launguage server, java language server, and java test language server are installed
 			require("mason-lspconfig").setup({
-				-- ensure_installed = { "lua_ls", "ts_ls", "jdtls", "cssls" },
-				ensure_installed = { "lua_ls", "ts_ls", "cssls", "html", "jsonls", "groovyls" },
+				ensure_installed = { "lua_ls", "ts_ls", "cssls", "html", "jsonls", "groovyls", "pylsp", "bashls" },
 			})
 		end,
 	},
@@ -79,6 +78,8 @@ return {
 			vim.lsp.config("html", capabilities)
 			vim.lsp.config("jsonls", capabilities)
 			vim.lsp.config("groovyls", capabilities)
+            vim.lsp.config("pylsp", capabilities)
+            vim.lsp.config("bashls", capabilities)
 
 			--          vim.lsp.config.freemarker_ls = {
 			-- 	cmd = {
