@@ -8,7 +8,7 @@ return {
 				nvim_jdtls_conflict = true, -- Check for nvim-jdtls conflict
 			},
 			lombok = {
-				enable = true,
+				enable = false,
 			},
 			java_test = {
 				enable = true,
