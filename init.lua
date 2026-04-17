@@ -41,6 +41,7 @@ require("config.keymaps")
 -- Pass it the options we specified above
 require("lazy").setup("plugins", opts)
 
+
 vim.o.background = "dark" -- or "light" for light mode
 vim.cmd([[colorscheme gruvbox]])
 
@@ -58,6 +59,8 @@ vim.keymap.set("n", "<leader>ob", function()
 	vim.ui.open(vim.fn.expand("%:p"))
 end, { desc = "[O]pen file in system default [B]rowser" })
 
+-- Настройки для Neovide
+--
 if vim.g.neovide then
 	vim.o.guifont = "JetBrainsMono Nerd Font Mono:h15"
 

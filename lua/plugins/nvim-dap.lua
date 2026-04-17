@@ -4,11 +4,13 @@ return {
 		-- ui plugins to make debugging simplier
 		"rcarriga/nvim-dap-ui",
 		"nvim-neotest/nvim-nio",
+        "theHamsta/nvim-dap-virtual-text",
 	},
 	config = function()
-		-- gain access to the dap plugin and its functions
 		local dap = require("dap")
-        local dapui = require("dapui")
+		local dapui = require("dapui")
+		dapui.setup()
+
 		-- For spring boot
 		-- ./gradlew <task-name> --debug-jvm
 		-- For custom task
@@ -20,22 +22,15 @@ return {
 				name = "Debug (Attach) - Remote",
 				hostName = "127.0.0.1",
 				port = 5005,
-                mainClass = "ru.gpay.web.GpayWebApplication",
+				mainClass = "ru.gpay.web.GpayWebApplication",
 			},
 		}
-        dapui.setup()
-        dap.listeners.before.attach.dapui_config = function() dapui.open() end
-        dap.listeners.before.launch.dapui_config = function() dapui.open() end
 
-		-- gain access to the dap ui plugin and its functions
-		local dapui = require("dapui")
+		dap.listeners.before.attach.dapui_config = function()
+			dapui.open()
+		end
 
-		-- Setup the dap ui with default configuration
-		dapui.setup()
-
-		-- setup an event listener for when the debugger is launched
 		dap.listeners.before.launch.dapui_config = function()
-			-- when the debugger is launched open up the debug ui
 			dapui.open()
 		end
 

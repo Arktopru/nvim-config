@@ -67,8 +67,8 @@ return {
                 -- Where and how should cmp rank and find completions
                 -- Order matters, cmp will provide lsp suggestions above all else
                 sources = cmp.config.sources({
-                    { name = 'luasnip' },
                     { name = 'nvim_lsp' },
+                    { name = 'luasnip' },
                     { name = 'buffer' },
                     { name = 'path' }
                 })
