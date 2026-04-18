@@ -39,7 +39,18 @@ return {
 		config = function()
 			-- ensure that we have lua language server, typescript launguage server, java language server, and java test language server are installed
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "ts_ls", "cssls", "html", "jsonls", "groovyls", "pylsp", "bashls" },
+				ensure_installed = {
+					"lua_ls",
+					"ts_ls",
+					"cssls",
+					"html",
+					"jdtls",
+					"jsonls",
+					"groovyls",
+					"pylsp",
+					"bashls",
+                    "gradle_ls",
+				},
 			})
 		end,
 	},
@@ -49,18 +60,21 @@ return {
 		config = function()
 			-- ensure the java debug adapter is installed
 			require("mason-nvim-dap").setup({
-				ensure_installed = { "java-debug-adapter", "java-test" },
+				ensure_installed = {
+					"java-debug-adapter",
+					"java-test",
+				},
 			})
 		end,
 	},
 	-- utility plugin for configuring the java language server for us
-	-- {
-	--     "mfussenegger/nvim-jdtls",
-	--     dependencies = {
-	--         "mfussenegger/nvim-dap",
-	--         "ray-x/lsp_signature.nvim",
-	--     },
-	-- },
+	{
+	    "mfussenegger/nvim-jdtls",
+	    dependencies = {
+	        "mfussenegger/nvim-dap",
+	        "ray-x/lsp_signature.nvim",
+	    },
+	},
 	{
 		"ray-x/lsp_signature.nvim",
 		config = function()
@@ -78,22 +92,9 @@ return {
 			vim.lsp.config("html", capabilities)
 			vim.lsp.config("jsonls", capabilities)
 			vim.lsp.config("groovyls", capabilities)
-            vim.lsp.config("pylsp", capabilities)
-            vim.lsp.config("bashls", capabilities)
-
-			--          vim.lsp.config.freemarker_ls = {
-			-- 	cmd = {
-			-- 		"java",
-			-- 		"-jar",
-			-- 		"/Users/arcady/freemarker-languageserver/target/freemarker-languageserver-all.jar",
-			-- 		"--stdio",
-			-- 	},
-			-- 	filetypes = {
-			-- 		"ftl",
-			-- 		"freemarker",
-			-- 	},
-			-- }
-			-- vim.lsp.config("freemarker_ls", capabilities)
+			vim.lsp.config("pylsp", capabilities)
+			vim.lsp.config("bashls", capabilities)
+            vim.lsp.config("gradle_ls", capabilities)
 
 			local default_diagnostic_config = {
 				signs = {
