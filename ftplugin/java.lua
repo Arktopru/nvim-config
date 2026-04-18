@@ -55,14 +55,15 @@ local config = {
 
   -- This is the default if not provided, you can remove it. Or adjust as needed.
   -- One dedicated LSP server & client will be started per unique root_dir
-  root_dir = require("jdtls.setup").find_root({ ".git", "mvnw", "pom.xml", "build.gradle" }),
+  -- @TODO Если проект не имеет подпроектов, то вместо stttings.gradle нужно указать build.gradle
+  root_dir = require("jdtls.setup").find_root({ ".git", "mvnw", "pom.xml", "settings.gradle" }),
 
   -- Here you can configure eclipse.jdt.ls specific settings
   -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
   settings = {
     java = {
       -- TODO Replace this with the absolute path to your main java version (JDTLS requires JDK 21 or higher)
-      home = "/usr/lib/jvm/java-21-openjdk-amd64",
+      home = "/opt/homebrew/Cellar/openjdk/25.0.2/bin/",
       eclipse = {
         downloadSources = true,
       },
@@ -73,23 +74,15 @@ local config = {
         runtimes = {
           {
             name = "JavaSE-1.8",
-            path = "/usr/lib/jvm/java-8-openjdk-amd64",
-          },
-          {
-            name = "JavaSE-11",
-            path = "/usr/lib/jvm/java-11-openjdk-amd64",
+            path = "/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home/",
           },
           {
             name = "JavaSE-17",
-            path = "/usr/lib/jvm/java-17-openjdk-amd64",
-          },
-          {
-            name = "JavaSE-19",
-            path = "/usr/lib/jvm/java-19-openjdk-amd64",
+            path = home .. "/Library/Java/JavaVirtualMachines/ms-17.0.18/Contents/home/",
           },
           {
             name = "JavaSE-21",
-            path = "/usr/lib/jvm/java-21-openjdk-amd64",
+            path = "/opt/homebrew/Cellar/openjdk@21/21.0.10/Contents/home/",
           },
         },
       },

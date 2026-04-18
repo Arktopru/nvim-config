@@ -8,18 +8,6 @@ return {
         -- call the setup function with default properties
         which_key.setup()
 
-        -- Register prefixes for the different key mappings we have setup previously
-        -- which_key.register({
-        --     ['<leader>/'] = {name = "Comments", _ = 'which_key_ignore'},
-        --     ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        --     ['<leader>d'] = {name = '[D]ebug' , _ = 'which_key_ignore' },
-        --     ['<leader>e'] = {name = '[E]xplorer', _ = 'which_key_ignore'},
-        --     ['<leader>f'] = { name = '[F]ind', _ = 'which_key_ignore' },
-        --     ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-        --     ['<leader>J'] = { name = '[J]ava', _ = 'which_key_ignore' },
-        --     ['<leader>t'] = { name = '[T]ab', _ = 'which_key_ignore'},
-        --     ['<leader>w'] = {name = '[W]indow', _ = 'which_key_ignore'}
-        -- })
         which_key.add({
             { "<leader>/", group = "Comments" },
             { "<leader>b", group = "[B]uffers" },
@@ -30,9 +18,10 @@ return {
             { "<leader>g", group = "[G]it" },
             { "<leader>J", group = "[J]ava" },
             { "<leader>r", group = "[R]efactor" },
-            { "<leader>t", group = "[T]ab" },
+            { "<leader>t", group = "[T]est" },
             { "<leader>w", group = "[W]indow" },
             { "<leader>o", group = "[O]pen" },
+            { "<leader>q", group = "[Q] diff" },
         })
     end,
 }

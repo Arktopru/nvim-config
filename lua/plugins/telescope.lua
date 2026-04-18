@@ -23,6 +23,8 @@ return {
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind by [G]rep" })
 			-- set a vim motion to <Space> + f + d to search for Code Diagnostics in the current project
 			vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "[F]ind [D]iagnostics" })
+            -- fuzzy find methods in current class
+            vim.keymap.set('n', '<leader>fm', function() require('telescope.builtin').treesitter({symbols={'function', 'method'}}) end, {desc = "[F]ind [M]ethods in class"}) 
 
 			vim.keymap.set("n", "<leader>fe", function()
 				require("telescope.builtin").diagnostics({ severity = vim.diagnostic.severity.ERROR })
