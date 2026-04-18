@@ -96,90 +96,89 @@ return {
 			vim.lsp.config("bashls", capabilities)
             vim.lsp.config("gradle_ls", capabilities)
 
-			local default_diagnostic_config = {
-				signs = {
-					active = true,
-					values = {
-						{ name = "DiagnosticSignError", text = icons.diagnostics.Error },
-						{ name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
-						{ name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
-						{ name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
-					},
-				},
-				virtual_text = false,
-				update_in_insert = false,
-				underline = true,
-				severity_sort = true,
-				float = {
-					focusable = true,
-					style = "minimal",
-					border = "rounded",
-					source = "always",
-					header = "",
-					prefix = "",
-				},
-			}
+            local default_diagnostic_config = {
+                signs = {
+                    active = true,
+                    values = {
+                        { name = "DiagnosticSignError", text = icons.diagnostics.Error },
+                        { name = "DiagnosticSignWarn",  text = icons.diagnostics.Warning },
+                        { name = "DiagnosticSignHint",  text = icons.diagnostics.Hint },
+                        { name = "DiagnosticSignInfo",  text = icons.diagnostics.Information },
+                    },
+                },
+                virtual_text = false,
+                update_in_insert = false,
+                underline = true,
+                severity_sort = true,
+                float = {
+                    focusable = true,
+                    style = "minimal",
+                    border = "rounded",
+                    source = "always",
+                    header = "",
+                    prefix = "",
+                },
+            }
+            vim.diagnostic.config(default_diagnostic_config)
 
-			vim.diagnostic.config(default_diagnostic_config)
+            for _, sign in ipairs(vim.tbl_get(vim.diagnostic.config(), "signs", "values") or {}) do
+                vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
+            end
 
-			for _, sign in ipairs(vim.tbl_get(vim.diagnostic.config(), "signs", "values") or {}) do
-				vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
-			end
-
-			-- Set vim motion for <Space> + c + h to show code documentation about the code the cursor is currently over if available
-			vim.keymap.set("n", "<leader>ch", vim.lsp.buf.hover, { desc = "[C]ode [H]over Documentation" })
-			-- Set vim motion for <Space> + c + d to go where the code/variable under the cursor was defined
-			vim.keymap.set("n", "<leader>cd", vim.lsp.buf.definition, { desc = "[C]ode Goto [D]efinition" })
-			-- Set vim motion for <Space> + c + a for display code action suggestions for code diagnostics in both normal and visual mode
-			vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ctions" })
-			-- Set vim motion for <Space> + c + r to display references to the code under the cursor
-			vim.keymap.set(
-				"n",
-				"<leader>cr",
-				require("telescope.builtin").lsp_references,
-				{ desc = "[C]ode Goto [R]eferences" }
-			)
-			-- Set vim motion for <Space> + c + i to display implementations to the code under the cursor
-			vim.keymap.set(
-				"n",
-				"<leader>ci",
-				require("telescope.builtin").lsp_implementations,
-				{ desc = "[C]ode Goto [I]mplementations" }
-			)
-			-- Set a vim motion for <Space> + c + <Shift>R to smartly rename the code under the cursor
-			vim.keymap.set("n", "<leader>cR", vim.lsp.buf.rename, { desc = "[C]ode [R]ename" })
-			-- Set a vim motion for <Space> + c + <Shift>D to go to where the code/object was declared in the project (class file)
-			vim.keymap.set("n", "<leader>cD", vim.lsp.buf.declaration, { desc = "[C]ode Goto [D]eclaration" })
-			vim.keymap.set("n", "<leader>co", function()
-				vim.lsp.buf.code_action({
-					context = { only = { "source.organizeImports" } },
-					apply = true,
-				})
-			end, { desc = "[C]ode [O]rganize imports" })
-			vim.keymap.set("n", "<leader>cq", function()
-				vim.lsp.buf.code_action({
-					context = { only = { "quickassist" } },
-					apply = true,
-				})
-			end, { desc = "[C]ode [Q]uick assist" })
-			vim.keymap.set("n", "<leader>cg", function()
-				vim.lsp.buf.code_action({
-					context = { only = { "source.generate" } },
-					apply = true,
-				})
-			end, { desc = "[C]ode [G]enerate" })
-			vim.keymap.set("n", "<leader>cm", function()
-				vim.lsp.buf.code_action({
-					context = { only = { "refactor.extract_method" } },
-					apply = true,
-				})
-			end, { desc = "[C]ode extract [M]ethod from cursor" })
-			vim.keymap.set("n", "<leader>rm", function()
-				vim.lsp.buf.code_action({
-					context = { only = { "refactor.move" } },
-					apply = true,
-				})
-			end, { desc = "[R]efactor [M]ove" })
-		end,
-	},
+            -- Set vim motion for <Space> + c + h to show code documentation about the code the cursor is currently over if available
+            vim.keymap.set("n", "<leader>ch", vim.lsp.buf.hover, { desc = "[C]ode [H]over Documentation" })
+            -- Set vim motion for <Space> + c + d to go where the code/variable under the cursor was defined
+            vim.keymap.set("n", "<leader>cd", vim.lsp.buf.definition, { desc = "[C]ode Goto [D]efinition" })
+            -- Set vim motion for <Space> + c + a for display code action suggestions for code diagnostics in both normal and visual mode
+            vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ctions" })
+            -- Set vim motion for <Space> + c + r to display references to the code under the cursor
+            vim.keymap.set(
+                "n",
+                "<leader>cr",
+                require("telescope.builtin").lsp_references,
+                { desc = "[C]ode Goto [R]eferences" }
+            )
+            -- Set vim motion for <Space> + c + i to display implementations to the code under the cursor
+            vim.keymap.set(
+                "n",
+                "<leader>ci",
+                require("telescope.builtin").lsp_implementations,
+                { desc = "[C]ode Goto [I]mplementations" }
+            )
+            -- Set a vim motion for <Space> + c + <Shift>R to smartly rename the code under the cursor
+            vim.keymap.set("n", "<leader>cR", vim.lsp.buf.rename, { desc = "[C]ode [R]ename" })
+            -- Set a vim motion for <Space> + c + <Shift>D to go to where the code/object was declared in the project (class file)
+            vim.keymap.set("n", "<leader>cD", vim.lsp.buf.declaration, { desc = "[C]ode Goto [D]eclaration" })
+            vim.keymap.set("n", "<leader>co", function()
+                vim.lsp.buf.code_action({
+                    context = { only = { "source.organizeImports" } },
+                    apply = true,
+                })
+            end, { desc = "[C]ode [O]rganize imports" })
+            vim.keymap.set("n", "<leader>cq", function()
+                vim.lsp.buf.code_action({
+                    context = { only = { "quickassist" } },
+                    apply = true,
+                })
+            end, { desc = "[C]ode [Q]uick assist" })
+            vim.keymap.set("n", "<leader>cg", function()
+                vim.lsp.buf.code_action({
+                    context = { only = { "source.generate" } },
+                    apply = true,
+                })
+            end, { desc = "[C]ode [G]enerate" })
+            vim.keymap.set("n", "<leader>cm", function()
+                vim.lsp.buf.code_action({
+                    context = { only = { "refactor.extract_method" } },
+                    apply = true,
+                })
+            end, { desc = "[C]ode extract [M]ethod from cursor" })
+            vim.keymap.set("n", "<leader>rm", function()
+                vim.lsp.buf.code_action({
+                    context = { only = { "refactor.move" } },
+                    apply = true,
+                })
+            end, { desc = "[R]efactor [M]ove" })
+        end,
+    },
 }
