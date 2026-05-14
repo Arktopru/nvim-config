@@ -89,7 +89,7 @@ return {
 					entry_prefix = "   ",
 					initial_mode = "insert",
 					selection_strategy = "reset",
-					path_display = { "smart" },
+					path_display = { "absolute" },
 					color_devicons = true,
 					vimgrep_arguments = {
 						"rg",
@@ -163,8 +163,8 @@ return {
 					},
 
 					lsp_references = {
-						-- theme = "dropdown",
-						-- initial_mode = "normal",
+						theme = "dropdown",
+						initial_mode = "normal",
 					},
 
 					lsp_definitions = {

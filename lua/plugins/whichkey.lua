@@ -17,6 +17,7 @@ return {
             { "<leader>f", group = "[F]ind" },
             { "<leader>g", group = "[G]it" },
             { "<leader>J", group = "[J]ava" },
+            { "<leader>J", group = "[K]ulala" },
             { "<leader>r", group = "[R]efactor" },
             { "<leader>t", group = "[T]est" },
             { "<leader>w", group = "[W]indow" },
